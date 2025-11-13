@@ -1,0 +1,56 @@
+{{ $avatar_img := .Site.Params.author.avatar }}
+{{ $avatar_img_alt := .Site.Params.author.name }}
+{{ $image := resources.Get $avatar_img }}
+<div class="author">
+    {{ with $image }}
+    {{ if eq .MediaType.SubType "svg" }}
+    <svg width="25em" height="25em" xmlns="http://www.w3.org/2000/svg">
+        <image width="25em" height="25em" href="{{ $image.RelPermalink }}" />
+    </svg>
+    {{ else }}
+    {{ $image1x := $image.Fill "70x70 center webp" }}
+    {{ $image2x := $image.Fill "140x140 center webp" }}
+    {{ $image3x := $image.Fill "210x210 center webp" }}
+    <img
+        class="author-avatar"
+        src="{{ $image1x.RelPermalink }}"
+        srcset="{{ $image2x.RelPermalink }} 2x, {{ $image3x.RelPermalink }} 3x"
+        alt="{{ $avatar_img_alt }}"
+        width="{{ $image1x.Width }}"
+        height="{{ $image1x.Height }}" />
+    {{ end }}
+    {{ end }}
+    <h2 class="author-name">{{ .Site.Params.author.intro }}</h2>
+    <p class="author-bio">{{ .Site.Params.author.description }}</p>
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:'Inter',sans-serif;color:#fff;background:transparent;">
+          <!-- Logo (open book icon in white) -->
+          <div style="width:60px;height:60px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:transparent;margin-bottom:10px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="40" height="40">
+              <path d="M3 4h7a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H3z"/>
+              <path d="M21 4h-7a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h7z"/>
+            </svg>
+          </div>
+
+          <!-- Bio text -->
+          <div style="max-width:420px;">
+            <h1 style="margin:0;font-size:22px;font-weight:600;color:#fff;">Savvyness</h1>
+            <p style="margin:6px 0 0 0;font-size:14px;line-height:1.6;color:#ddd;">
+              A space by Savon Ghimire — reflections, reviews, and stories on technology, learning, and creation.
+            </p>
+            <p style="margin:8px 0 0 0;font-size:13px;color:#ccc;">
+              <span style="opacity:0.85;">Mail:</span> <a href="mailto:savonghimire@gmail.com" style="color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.3);">savonghimire@gmail.com</a>
+            </p>
+         </div>
+        </div>
+
+        <!-- Divider section for posts -->
+        <div style="width:100%;max-width:480px;margin:40px auto 0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;">
+          <hr style="width:100%;border:none;border-top:1px solid rgba(255,255,255,0.1);margin-bottom:16px;">
+        <p style="margin:0;font-size:14px;color:#ffffff;letter-spacing:0.5px;text-transform:uppercase;">
+         Posts & Insights
+        </p>
+    </div>
+
+
+</div>
